@@ -31,7 +31,8 @@
     "cross-spawn": "^7.0.3",
     "esbuild": "^0.14.25",
     "esbuild-serve": "^1.0.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "sockjs": "^0.3.24"
   },
   "browserslist": {
     "production": [
