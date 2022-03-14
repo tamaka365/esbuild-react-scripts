@@ -5,6 +5,8 @@ const fs = require("fs");
 const { merge } = require("lodash");
 const appDirectory = fs.realpathSync(process.cwd());
 
+const util = require("util");
+
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
 const res = resolveApp("app.config.json");
@@ -17,4 +19,26 @@ for (const name in env) {
   }
 }
 
-console.log("process.env >>>", process.env);
+const starter = async () => {
+  let config = [{}, {}];
+
+  const configFileDir = resolveApp("esbuild.override.js");
+  let configFile;
+
+  try {
+    configFile = await util.promisify(fs.stat)(configFileDir);
+  } catch (error) {}
+
+  if (configFile && configFile.isFile()) {
+    config = require(configFileDir)(...config);
+  }
+
+  require("esbuild")
+    .serve(...config)
+    .then((server) => {
+      // Call "stop" on the web server to stop serving
+      // server.stop()
+    });
+};
+
+starter();
