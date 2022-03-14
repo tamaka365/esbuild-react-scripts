@@ -7,6 +7,8 @@ const appDirectory = fs.realpathSync(process.cwd());
 
 const util = require("util");
 
+const esbuildServe = require("esbuild-serve");
+
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
 const res = resolveApp("app.config.json");
@@ -33,12 +35,15 @@ const starter = async () => {
     config = require(configFileDir)(...config);
   }
 
-  require("esbuild")
-    .serve(...config)
-    .then((server) => {
-      // Call "stop" on the web server to stop serving
-      // server.stop()
-    });
+  esbuildServe(
+    {
+      logLevel: "info",
+      entryPoints: ["src/index.js"],
+      bundle: true,
+      outfile: "www/main.js",
+    },
+    { root: "www" }
+  );
 };
 
 starter();
