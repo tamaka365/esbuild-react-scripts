@@ -18,10 +18,9 @@ process.on("unhandledRejection", (err) => {
 var spawn = require("cross-spawn");
 
 const args = process.argv.slice(2);
-const env = args.find(arg=>/^(env=).*/.test(arg)).substr(4)
+const env = args.find(arg=>/^(env=).*/.test(arg))?.substr(4)
 
 if (env) {
-  console.log("env >>>", env);
   process.env.APP_ENV = env;
 }
 
