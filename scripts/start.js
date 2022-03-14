@@ -8,9 +8,11 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 const res = resolveApp('app.config.json')
 
-const name = 'dev'
+const APP_ENV = process.env.APP_ENV
 
-const {default: basic, [name]: me} = require(res)
+const {default: basic, [APP_ENV]: me} = require(res)
+
+console.log('me >>>', me);
 
 const {env} = Object.assign(basic, me)
 
