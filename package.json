@@ -1,0 +1,59 @@
+{
+  "name": "esbuild-react-scripts",
+  "version": "0.0.1",
+  "description": "Configuration and scripts for Init React App.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tamaka365/init-react-app.git",
+    "directory": "packages/esbuild-react-scripts"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/tamaka365/init-react-app/issues"
+  },
+  "files": [
+    "bin",
+    "config",
+    "lib",
+    "scripts",
+    "template",
+    "template-typescript",
+    "utils"
+  ],
+  "bin": {
+    "react-scripts": "./bin/react-scripts.js"
+  },
+  "types": "./lib/react-app.d.ts",
+  "dependencies": {
+    "cross-spawn": "^7.0.3",
+    "esbuild": "^0.14.25"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
+  },
+  "peerDependencies": {
+    "react": ">= 16",
+    "typescript": "^3.2.1 || ^4"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
