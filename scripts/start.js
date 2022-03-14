@@ -2,7 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
-const {merge} = require('lodash-es')
+const {merge} = require('lodash')
 const appDirectory = fs.realpathSync(process.cwd());
 
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
