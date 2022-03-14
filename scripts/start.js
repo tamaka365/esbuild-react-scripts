@@ -2,19 +2,16 @@
 
 const path = require('path');
 const fs = require('fs');
+const {merge} = require('lodash-es')
 const appDirectory = fs.realpathSync(process.cwd());
 
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 const res = resolveApp('app.config.json')
 
-const APP_ENV = process.env.APP_ENV
+const {default: basic, [process.env.APP_ENV]: app_env} = require(res)
 
-const {default: basic, [APP_ENV]: me} = require(res)
-
-console.log('me >>>', me);
-
-const {env} = Object.assign(basic, me)
+const {env} = merge(basic, app_env)
 
 process.env = {...process.env, ...env};
 
