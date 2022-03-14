@@ -28,11 +28,11 @@
   },
   "types": "./lib/react-app.d.ts",
   "dependencies": {
-    "cross-spawn": "^7.0.3"
+    "cross-spawn": "^7.0.3",
+    "lodash-es": "^4.17.21"
   },
   "devDependencies": {
-    "esbuild": "^0.14.25",
-    "lodash-es": "^4.17.21"
+    "esbuild": "^0.14.25"
   },
   "browserslist": {
     "production": [
