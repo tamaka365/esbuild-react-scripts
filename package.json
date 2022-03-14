@@ -4,7 +4,7 @@
   "description": "Configuration and scripts for Init React App.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tamaka365/init-react-app.git",
+    "url": "https://github.com/tamaka365/esbuild-react-scripts.git",
     "directory": "packages/esbuild-react-scripts"
   },
   "license": "MIT",
@@ -12,7 +12,7 @@
     "node": ">=14.0.0"
   },
   "bugs": {
-    "url": "https://github.com/tamaka365/init-react-app/issues"
+    "url": "https://github.com/tamaka365/esbuild-react-scripts/issues"
   },
   "files": [
     "bin",
@@ -24,7 +24,7 @@
     "utils"
   ],
   "bin": {
-    "react-scripts": "./bin/react-scripts.js"
+    "react-scripts": "./bin/esbuild-react-scripts.js"
   },
   "types": "./lib/react-app.d.ts",
   "dependencies": {
