@@ -5,11 +5,9 @@ const fs = require("fs");
 const { merge } = require("lodash");
 const appDirectory = fs.realpathSync(process.cwd());
 
-const http = require("http");
 const esbuild = require("esbuild");
 
 const util = require("util");
-const { log } = require("console");
 
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
@@ -28,9 +26,6 @@ const starter = async () => {
     {
       port: 8000,
       servedir: resolveApp("public"),
-      onRequest: (val) => {
-        console.log("val >>>", val);
-      },
     },
     {
       entryPoints: [resolveApp("src/index.js")],
@@ -51,19 +46,22 @@ const starter = async () => {
     config = require(configFileDir)(...config);
   }
 
-  esbuild.serve(...config).then((result) => {
-    // console.log("refresh >>>", result);
+  //   esbuild
+  //     .build({
+  //       ...config[1],
+  //       outdir: ".cache",
+  //       watch: {
+  //         onRebuild(...args) {
+  //           console.log("args >>>", args);
 
-    chokidar
-      .watch(`${resolveApp("public")}/**/*.{js,css}`, {
-        interval: 0, // No delay
-      })
-      // Rebuilds esbuild (incrementally -- see `build.incremental`).
-      .on("all", () => {
-        // builder.rebuild();
-        console.log("rebuilding...");
-      });
-  });
+  //         //   esbuild.serve(...config).then((result) => {});
+  //         },
+  //       },
+  //     })
+  //     .then((result) => {
+  //       console.log("watching...", result);
+  esbuild.serve({ ...config[0] }, { ...config[1] }).then((result) => {});
+  // });
 };
 
 starter();
