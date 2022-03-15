@@ -30,6 +30,7 @@
   "dependencies": {
     "cross-spawn": "^7.0.3",
     "esbuild": "^0.14.25",
+    "esbuild-dev-server": "^0.3.0",
     "lodash": "^4.17.21"
   },
   "browserslist": {

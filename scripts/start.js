@@ -5,7 +5,8 @@ const fs = require("fs");
 const { merge } = require("lodash");
 const appDirectory = fs.realpathSync(process.cwd());
 
-const esbuild = require("esbuild");
+const { build } = require("esbuild");
+const esBuildDevServer = require("esbuild-dev-server");
 
 const util = require("util");
 
@@ -46,22 +47,24 @@ const starter = async () => {
     config = require(configFileDir)(...config);
   }
 
-  //   esbuild
-  //     .build({
-  //       ...config[1],
-  //       outdir: ".cache",
-  //       watch: {
-  //         onRebuild(...args) {
-  //           console.log("args >>>", args);
+  //   esbuild.serve({ ...config[0] }, { ...config[1] }).then((result) => {});
 
-  //         //   esbuild.serve(...config).then((result) => {});
-  //         },
-  //       },
-  //     })
-  //     .then((result) => {
-  //       console.log("watching...", result);
-  esbuild.serve({ ...config[0] }, { ...config[1] }).then((result) => {});
-  // });
+  esBuildDevServer.start(
+    build({
+      entryPoints: ["src/index.js"],
+      outdir: "public",
+      incremental: true,
+      // and more options ...
+    }),
+    {
+      port: "8080", // optional, default: 8080
+      watchDir: "src", // optional, default: "src"
+      index: "public/index.html", // optional
+      staticDir: "public", // optional
+      onBeforeRebuild: {}, // optional
+      onAfterRebuild: {}, // optional
+    }
+  );
 };
 
 starter();
