@@ -28,6 +28,7 @@
   },
   "types": "./lib/react-app.d.ts",
   "dependencies": {
+    "chokidar": "^3.5.3",
     "cross-spawn": "^7.0.3",
     "esbuild": "^0.14.25",
     "esbuild-serve": "^1.0.1",

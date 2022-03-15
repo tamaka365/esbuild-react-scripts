@@ -5,12 +5,11 @@ const fs = require("fs");
 const { merge } = require("lodash");
 const appDirectory = fs.realpathSync(process.cwd());
 
-const sockjs = require("sockjs");
-
 const http = require("http");
 const esbuild = require("esbuild");
 
 const util = require("util");
+const { log } = require("console");
 
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
@@ -52,18 +51,18 @@ const starter = async () => {
     config = require(configFileDir)(...config);
   }
 
-  const echo = sockjs.createServer({ prefix: "/echo" });
-  echo.on("connection", function (conn) {
-    conn.on("data", function (message) {
-      conn.write(message);
-    });
-    conn.on("close", function () {});
-  });
-
   esbuild.serve(...config).then((result) => {
     // console.log("refresh >>>", result);
 
-    echo.attach(result);
+    chokidar
+      .watch(`${resolveApp("public")}/**/*.{js,css}`, {
+        interval: 0, // No delay
+      })
+      // Rebuilds esbuild (incrementally -- see `build.incremental`).
+      .on("all", () => {
+        // builder.rebuild();
+        console.log("rebuilding...");
+      });
   });
 };
 
